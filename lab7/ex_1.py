@@ -3,54 +3,50 @@ from datetime import datetime
 
 pygame.init()
 
+screen = pygame.display.set_mode([1000, 750])
 
-screen = pygame.display.set_mode((1000, 750))
-pygame.display.set_caption("Mickey clock")
-# Иконкасы
-
-# Суреттер
 right_arm = pygame.image.load(
     r"C:\Users\Aikorkem\Desktop\STUDY\pp2\labs\lab7\img\mickey_right_arm.png"
 )
 left_arm = pygame.image.load(
     r"C:\Users\Aikorkem\Desktop\STUDY\pp2\labs\lab7\img\mickey_left_arm.png"
 )
-without_arms = pygame.image.load(
+without_arm = pygame.image.load(
     r"C:\Users\Aikorkem\Desktop\STUDY\pp2\labs\lab7\img\mickey_without_arms.png"
 )
+pygame.mixer.init()
+mus = pygame.mixer.music.load(
+    r"C:\Users\Aikorkem\Desktop\STUDY\pp2\labs\lab7\пайгей музыка\Kendrick Lamar feat. SZA - All The Stars.mp3"
+)
 
-# Өлшемін дұрыстау
+
 right_arm = pygame.transform.smoothscale(right_arm, (1000, 750))
 left_arm = pygame.transform.smoothscale(left_arm, (1000, 750))
-without_arms = pygame.transform.smoothscale(without_arms, (1000, 750))
+without_arm = pygame.transform.smoothscale(without_arm, (1000, 750))
 
 running = True
-
-# Басты бөлік
 while running:
 
-    # Қазіргі уақыт
     now = datetime.now()
-    angle_min = -now.minute * 6
-    angle_sec = -now.second * 6
+    angle = -now.second * 6
+    angle2 = -now.minute * 6
 
-    # Суреттерді бұрамыз
-    rotated_right = pygame.transform.rotate(right_arm, angle_min)
-    rotated_left = pygame.transform.rotate(left_arm, angle_sec)
+    rotated_right = pygame.transform.rotate(right_arm, angle)
+    rotated_left = pygame.transform.rotate(left_arm, angle2)
 
-    # Центрін дұрыстаймыз
     right_rect = rotated_right.get_rect(center=(500, 375))
     left_rect = rotated_left.get_rect(center=(500, 375))
 
-    # Суреттерді экранға шығарамыз
-    screen.fill((0, 0, 0))  # Ескі беттерін өшіреміз
-    screen.blit(without_arms, (0, 0))
-    screen.blit(rotated_right, right_rect.topleft)  # Минут көрсететін қолы
-    screen.blit(rotated_left, left_rect.topleft)  # Секунд көрсететін қолы
+    screen.blit(without_arm, (0, 0))
+    screen.blit(rotated_right, right_rect.topleft)
+    screen.blit(rotated_left, left_rect.topleft)
 
-    pygame.display.update()  # Экранды жаңартамыз
+    if angle == 0:
+        mus.play()
+
+    pygame.display.flip()
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-            pygame.quit()
+pygame.quit()
