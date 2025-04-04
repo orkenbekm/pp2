@@ -3,7 +3,6 @@ import json
 with open("lab4", "JSON", "sample-data (1).json", "r") as file:
     data = json.load(file)
 
-# Заголовок таблицы
 print(f"{'DN':<50} {'Description':<20} {'Speed':<10} {'MTU':<10}")
 print("-" * 90)
 

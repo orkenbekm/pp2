@@ -7,10 +7,6 @@ pygame.init()
 screen = pygame.display.set_mode((1000, 750))
 pygame.display.set_caption("Mickey clock")
 # Иконкасы
-icon = pygame.image.load(
-    r"C:\Users\Aikorkem\Desktop\STUDY\pp2\labs\lab7\img\mickeyclock.jpeg"
-)
-pygame.display.set_icon(icon)
 
 # Суреттер
 right_arm = pygame.image.load(
