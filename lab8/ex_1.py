@@ -86,7 +86,7 @@ class Coin(pygame.sprite.Sprite):
         self.rect.center = (random.randint(40, SCREEN_WIDTH - 40), -300)
 
     def move(self):
-        self.rect.y += SPEED
+        self.rect.y += SPEED * 5
         if self.rect.top > SCREEN_HEIGHT:
             self.reset_position()
 
